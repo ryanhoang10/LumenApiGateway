@@ -5,11 +5,28 @@ use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Book;
+use App\Services\BookService;
 
 class BookController extends Controller
 {
     use ApiResponser; 
-    
+
+     /**
+     * The service to consume the authors microservices
+     * @var BookService
+     */
+    public $bookService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(BookService $bookService)
+    {
+        $this->bookService = $bookService;
+    }
+
     /**
      * Return the list of authors
      * @return Illuminate\Http\Response
